@@ -1,0 +1,38 @@
+{
+    "listen": {
+        "ip": "0.0.0.0",
+        "port": 6454
+    },
+    "receive_universe": 0,
+    "target": {
+        "ip": "127.0.0.1",
+        "port": 6455
+    },
+    "send_universe": 0,
+    "channels": {
+        "pan": {
+            "address": 1,
+            "bits": 16
+        },
+        "tilt": {
+            "address": 3,
+            "bits": 16
+        }
+    },
+    "controller": {
+        "joystick_index": 0,
+        "pan_axis": 0,
+        "tilt_axis": 1,
+        "deadzone": 0.1,
+        "pan_speed": 3000,
+        "tilt_speed": 3000,
+        "invert_pan": false,
+        "invert_tilt": false,
+        "return_speed": 7000
+    },
+    "update_rate_hz": 40,
+    "ui": {
+        "port": 3011,
+        "edit_code": "1234"
+    }
+}

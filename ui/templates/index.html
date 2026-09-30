@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Follow Spot Injector</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Follow Spot Injector</h1>
+
+    <section id="status">
+        <p>
+            <span id="connDot" class="dot"></span>
+            <span id="connText">Waiting for Art-Net...</span>
+            &nbsp;|&nbsp; Controller: <span id="controllerName">-</span>
+        </p>
+    </section>
+
+    <section id="pad-section">
+        <h2>Pan / Tilt offset</h2>
+        <div id="pad">
+            <div id="consoleMarker" class="marker" title="Console value"></div>
+            <div id="outputMarker" class="marker" title="Output value (with override)"></div>
+        </div>
+        <table id="readout">
+            <tr><th></th><th>Console</th><th>Output</th><th>Offset</th></tr>
+            <tr><td>Pan</td><td id="panRaw">-</td><td id="panOut">-</td><td id="panOffset">-</td></tr>
+            <tr><td>Tilt</td><td id="tiltRaw">-</td><td id="tiltOut">-</td><td id="tiltOffset">-</td></tr>
+        </table>
+    </section>
+
+    <section id="log-section">
+        <h2>Debug log</h2>
+        <pre id="log"></pre>
+    </section>
+
+    <section id="settings">
+        <h2>Settings</h2>
+
+        <div id="lockOverlay">
+            <p>Settings are locked. Enter the 4-digit code from profile.json to edit.</p>
+            <input id="codeInput" type="password" inputmode="numeric" maxlength="4" placeholder="0000">
+            <button id="unlockBtn">Unlock</button>
+        </div>
+
+        <form id="settingsForm" hidden>
+            <fieldset>
+                <legend>Art-Net</legend>
+                <label>Listen IP <input id="listenIp" type="text"></label>
+                <label>Listen port <input id="listenPort" type="number"></label>
+                <label>Receive universe <input id="receiveUniverse" type="number"></label>
+                <label>Target (fixture) IP <input id="targetIp" type="text"></label>
+                <label>Target port <input id="targetPort" type="number"></label>
+                <label>Send universe <input id="sendUniverse" type="number"></label>
+                <label>Pan channel <input id="panAddress" type="number" min="1"></label>
+                <label>Pan bits <input id="panBits" type="number" min="8" step="8"></label>
+                <label>Tilt channel <input id="tiltAddress" type="number" min="1"></label>
+                <label>Tilt bits <input id="tiltBits" type="number" min="8" step="8"></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Controller</legend>
+                <label>Joystick index <input id="joystickIndex" type="number" min="0"></label>
+                <label>Pan axis <input id="panAxis" type="number" min="0"></label>
+                <label>Tilt axis <input id="tiltAxis" type="number" min="0"></label>
+                <label>Deadzone <input id="deadzone" type="number" step="0.01" min="0" max="1"></label>
+                <label>Pan speed <input id="panSpeed" type="number"></label>
+                <label>Tilt speed <input id="tiltSpeed" type="number"></label>
+                <label>Invert pan <input id="invertPan" type="checkbox"></label>
+                <label>Invert tilt <input id="invertTilt" type="checkbox"></label>
+                <label title="Max DMX units/sec the override eases back to the console's value once it changes. 0 = snap instantly.">Return speed <input id="returnSpeed" type="number" min="0"></label>
+                <label>Update rate (Hz) <input id="updateRate" type="number" min="1"></label>
+            </fieldset>
+
+            <button type="submit">Save</button>
+            <p id="saveMessage"></p>
+        </form>
+
+        <div id="restartRow" hidden>
+            <button id="restartBtn" type="button">Restart injector</button>
+            <p id="restartMessage"></p>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
